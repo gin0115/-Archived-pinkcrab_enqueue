@@ -2,6 +2,8 @@
 
 The PinkCrab Enqueue calss allows for a clean and chainable alternative for enqueuing scripts and styles in WordPress.
 
+** At present this class doesnt support BC in regards named properties in PHP8. Argument names may change, although we have made this so most methods take a single or no properites at all. **
+
 ```php
 <?php 
 add_action('wp_enqueue_scripts', function(){
@@ -154,7 +156,7 @@ console.log(MyScriptHandle.key2) // value2
 ```
 
 ### Footer  ###
-By defualt all scripts are enqueued in the footer, but this can be changed if it needs to be called in the head. By calling either **footer(false)* or *header()*
+By defualt all scripts are enqueued in the footer, but this can be changed if it needs to be called in the head. By calling either *footer(false)* or *header()*
 
 *This can only be called for scripts*
 
@@ -171,3 +173,62 @@ Enqueue::script('my_script')
     ->register();
 
 ```
+### Media  ###
+As with wp_enqueue_style() you can specifiy the media for which the sheet is defined for. Accepts all the same values as wp_enqueue_style()
+
+*This can only be called for styles*
+
+```php
+<?php
+Enqueue::style('my_style')
+    ->src(PLUGIN_BASE_URL . 'assets/js/my-style.css')
+    ->media('(orientation: portrait)')
+    ->register();
+
+```
+### Registration  ###
+Once your Enqueue object has been populted all you need to call **register()** for wp_enqueue_script() or wp_enqueue_style() to be called. You can either do all this inline (like the first example) or the Enqueue object can be populated and only called when required.
+
+*This is the same for both styles and scripts*
+
+```php
+<?php
+class My_Thingy{
+    /**
+     * Reutrns a partly finalised Enqueue scripts, with defined url.
+     * 
+     * @param string $script The file location.
+     * @return Enqueue The populated enqueue object.
+     */ 
+    protected function enqueue($script): Enqueue {
+        return Enqueue::script('My_Script')
+            ->src($script)
+            ->deps('jquery')
+            ->lastest_version();
+    } 
+
+    /**
+     * Called to initalise the class.
+     * Registers our JS based on a constitional.
+     * 
+     * @return void
+     */
+    public function init(): void {
+        if(some_conditional()){
+            add_action('wp_enqueue_scripts', function(){
+                $this->enqueue(SOME_FILE_LOCATION_CONSTANT)->register()
+            });
+        } else {
+            add_action('wp_enqueue_scripts', function(){
+                $this->enqueue(SOMEOTHER_FILE_LOCATION_CONSTANT)->register()
+            });
+        }
+    }
+}
+
+add_action('wp_loaded', [new My_Thingy, 'init']);
+```
+This obviously can be passed around between different classes/functions
+
+### Contributions  ###
+If you would like to make any suggestions or contributions to this little class, please feel free to submit a pull request or reach out to speak to me. at glynn@pinkcrab.co.uk.
