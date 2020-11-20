@@ -43,7 +43,7 @@ $enqueue_script = Enqueue::script('my_script');
 $enqueue_style = Enqueue::style('my_style');
 
 ```
-When you call using the static methods script() or style(), the current instance is returned, allowing for chaining into a single call.
+When you call using the static methods script() or style(), the current instance is returned, allowing for chaining into a single call. Rather than doing it in the more verbose methods.
 
 ```php
 <?php
@@ -59,7 +59,34 @@ Enqueue::script('my_script')
     ->register();
 ```
 
+### File Location ###
 
-> lastest_version()
+The URI to the defined js or css file can be defined here. This must be passed as a url and not the file path.
 
-This grabs the last modified date from the defined script or style sheet, allowing reducing the fustrations of caching during development. While this is really handy during development, it should be changed to **->ver('your_version')** when used in production.
+*This is the same for both styles and scripts*
+
+```php
+<?php
+Enqueue::script('my_script')
+    ->src(PLUGIN_BASE_URL . 'assets/js/my-script.js')
+    ->register();
+```
+
+### Version  ###
+
+Like the underlying wp_enqueue_script() and wp_enqueue_style() function, we can define a verison number to our scripts. This can be done using the ver('1.2.2') method.
+```php
+<?php
+Enqueue::script('my_script')
+    ->src(PLUGIN_BASE_URL . 'assets/js/my-script.js')
+    ->ver(PLUGIN_VERSION)
+    ->register();
+```
+However this can be fustrating while developing, so rather than using the current timestamp as a temp version. You can use the *lastest_version()*, this grabs the last modified date from the defined script or style sheet, allowing reducing the fustrations of caching during development. While this is really handy during development, it should be changed to **->ver('your_version')** when used in production.
+```php
+<?php
+Enqueue::script('my_script')
+    ->src(PLUGIN_BASE_URL . 'assets/js/my-script.js')
+    ->lastest_version() 
+```
+
