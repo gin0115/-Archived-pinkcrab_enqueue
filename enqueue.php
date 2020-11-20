@@ -16,17 +16,17 @@
  *
  * @author Glynn Quelch <glynn.quelch@gmail.com>
  * @license http://www.opensource.org/licenses/mit-license.html  MIT License
- * @package PinkCrab\Core
+ * @package PinkCrab
  */
 
-namespace PinkCrab\Core;
+namespace PinkCrab;
 
 /**
  * WordPress Script and Style enqueuing class.
  *
  * @author Glynn Quelch <glynn.quelch@gmail.com>
  */
-class Enqueue {
+final class Enqueue {
 
 	/**
 	 * The handle to enqueue the script or style with.
@@ -106,8 +106,7 @@ class Enqueue {
 	 *
 	 * @var boolean
 	 */
-	protected $admin = false;
-
+	protected $admin = true;
 
 	/**
 	 * Creates an Enqueue instance.
@@ -242,6 +241,16 @@ class Enqueue {
 	 */
 	public function footer( bool $footer = true ): self {
 		$this->footer = $footer;
+		return $this;
+	}
+
+	/**
+	 * Should the script be called in the header.
+	 *
+	 * @return self
+	 */
+	public function header(): self {
+		$this->footer = false;
 		return $this;
 	}
 
