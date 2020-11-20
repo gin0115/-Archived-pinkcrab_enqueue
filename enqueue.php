@@ -16,10 +16,10 @@
  *
  * @author Glynn Quelch <glynn.quelch@gmail.com>
  * @license http://www.opensource.org/licenses/mit-license.html  MIT License
- * @package PinkCrab\Core
+ * @package PinkCrab
  */
 
-namespace PinkCrab\Core;
+namespace PinkCrab;
 
 /**
  * WordPress Script and Style enqueuing class.
