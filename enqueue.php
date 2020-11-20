@@ -16,22 +16,24 @@
  *
  * @author Glynn Quelch <glynn.quelch@gmail.com>
  * @license http://www.opensource.org/licenses/mit-license.html  MIT License
- * @package PinkCrab\Core
+ * @package PinkCrab
+ * @version 1.0.0
  */
 
-namespace PinkCrab\Core;
+namespace PinkCrab;
 
 /**
  * WordPress Script and Style enqueuing class.
  *
  * @author Glynn Quelch <glynn.quelch@gmail.com>
  */
-class Enqueue {
+final class Enqueue {
 
 	/**
 	 * The handle to enqueue the script or style with.
 	 * Also used for any locaized variables.
 	 *
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $handle;
@@ -39,6 +41,7 @@ class Enqueue {
 	/**
 	 * The type of file to enqueue.
 	 *
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $type;
@@ -46,6 +49,7 @@ class Enqueue {
 	/**
 	 * The file loaction (URI)
 	 *
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $src;
@@ -53,6 +57,7 @@ class Enqueue {
 	/**
 	 * Dependencies which must be loaded prior.
 	 *
+	 * @since 1.0.0
 	 * @var array
 	 */
 	protected $deps = array();
@@ -60,6 +65,7 @@ class Enqueue {
 	/**
 	 * Version tag for file enqueued
 	 *
+	 * @since 1.0.0
 	 * @var mixed
 	 */
 	protected $ver = false;
@@ -67,6 +73,7 @@ class Enqueue {
 	/**
 	 * Defines if script should be loaded in footer (true) or header (false)
 	 *
+	 * @since 1.0.0
 	 * @var boolean
 	 */
 	protected $footer = true;
@@ -74,6 +81,7 @@ class Enqueue {
 	/**
 	 * Values to be localized when script enqueued.
 	 *
+	 * @since 1.0.0
 	 * @var array|null
 	 */
 	protected $localize;
@@ -82,6 +90,7 @@ class Enqueue {
 	 * Defines if script should be parsed inline or enqueued.
 	 * Please note this should only be used for simple and small JS files.
 	 *
+	 * @since 1.0.0
 	 * @var boolean
 	 */
 	protected $inline = false;
@@ -90,6 +99,7 @@ class Enqueue {
 	 * Style sheet which has been defined.
 	 * Accepts media types like wp_enqueue_styles.
 	 *
+	 * @since 1.0.0
 	 * @var string
 	 */
 	protected $media = 'all';
@@ -97,6 +107,7 @@ class Enqueue {
 	/**
 	 * If file should be loaded on the front end.
 	 *
+	 * @since 1.0.0
 	 * @var boolean
 	 */
 	protected $front = true;
@@ -104,14 +115,15 @@ class Enqueue {
 	/**
 	 * Defines if file should be loaded in wp-admin
 	 *
+	 * @since 1.0.0
 	 * @var boolean
 	 */
-	protected $admin = false;
-
+	protected $admin = true;
 
 	/**
 	 * Creates an Enqueue instance.
 	 *
+	 * @since 1.0.0
 	 * @param string $handle
 	 * @param string $type
 	 */
@@ -123,6 +135,7 @@ class Enqueue {
 	/**
 	 * Creates a static instace of the Enqueue class for a script.
 	 *
+	 * @since 1.0.0
 	 * @param string $handle
 	 * @return self
 	 */
@@ -133,6 +146,7 @@ class Enqueue {
 	/**
 	 * Creates a static instace of the Enqueue class for a style.
 	 *
+	 * @since 1.0.0
 	 * @param string $handle
 	 * @return self
 	 */
@@ -143,6 +157,7 @@ class Enqueue {
 	/**
 	 * Enqueue in wp-admin (ajax/rest)
 	 *
+	 * @since 1.0.0
 	 * @param boolean $admin
 	 * @return self
 	 */
@@ -154,6 +169,7 @@ class Enqueue {
 	/**
 	 * Enqueue in frontend only.
 	 *
+	 * @since 1.0.0
 	 * @param boolean $front
 	 * @return self
 	 */
@@ -165,6 +181,7 @@ class Enqueue {
 	/**
 	 * Defined the SRC of the file.
 	 *
+	 * @since 1.0.0
 	 * @param string $src
 	 * @return self
 	 */
@@ -176,6 +193,7 @@ class Enqueue {
 	/**
 	 * Defined the Dependencies of the enqueue.
 	 *
+	 * @since 1.0.0
 	 * @param string ...$deps
 	 * @return self
 	 */
@@ -187,6 +205,7 @@ class Enqueue {
 	/**
 	 * Defined the version of the enqueue
 	 *
+	 * @since 1.0.0
 	 * @param string $ver
 	 * @return self
 	 */
@@ -198,6 +217,7 @@ class Enqueue {
 	/**
 	 * Define the media type.
 	 *
+	 * @since 1.0.0
 	 * @param string $media
 	 * @return self
 	 */
@@ -209,6 +229,7 @@ class Enqueue {
 	/**
 	 * Sets the version as last modified file time.
 	 *
+	 * @since 1.0.0
 	 * @return self
 	 */
 	public function lastest_version(): self {
@@ -221,6 +242,7 @@ class Enqueue {
 	/**
 	 * Checks to see if a file exist using URL (not path).
 	 *
+	 * @since 1.0.0
 	 * @param string $url The URL of the file being checked.
 	 * @return boolean true if it does, false if it doesnt.
 	 */
@@ -237,6 +259,7 @@ class Enqueue {
 	/**
 	 * Should the script be called in the footer.
 	 *
+	 * @since 1.0.0
 	 * @param boolean $footer
 	 * @return self
 	 */
@@ -246,8 +269,20 @@ class Enqueue {
 	}
 
 	/**
+	 * Should the script be called in the header.
+	 *
+	 * @since 1.0.0
+	 * @return self
+	 */
+	public function header(): self {
+		$this->footer = false;
+		return $this;
+	}
+
+	/**
 	 * Should the script be called in the inline.
 	 *
+	 * @since 1.0.0
 	 * @param boolean $inline
 	 * @return self
 	 */
@@ -259,6 +294,7 @@ class Enqueue {
 	/**
 	 * Pass any key => value pairs to be localised with the enqueue.
 	 *
+	 * @since 1.0.0
 	 * @param array $args
 	 * @return self
 	 */
@@ -270,6 +306,7 @@ class Enqueue {
 	/**
 	 * Registers the file as either enqueued or inline parsed.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public function register(): void {
@@ -285,6 +322,7 @@ class Enqueue {
 	/**
 	 * Regsiters the style.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	private function register_style() {
@@ -300,6 +338,7 @@ class Enqueue {
 	/**
 	 * Registers and enqueues or inlines the script, with any passed localised data.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	private function register_script() {
