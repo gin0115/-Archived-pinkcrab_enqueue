@@ -79,10 +79,10 @@ Like the underlying wp_enqueue_script() and wp_enqueue_style() function, we can 
 <?php
 Enqueue::script('my_script')
     ->src(PLUGIN_BASE_URL . 'assets/js/my-script.js')
-    ->ver(PLUGIN_VERSION)
+    ->ver('1.2.2') // Set to your current version number.
     ->register();
 ```
-However this can be fustrating while developing, so rather than using the current timestamp as a temp version. You can use the *lastest_version()*, this grabs the last modified date from the defined script or style sheet, allowing reducing the fustrations of caching during development. While this is really handy during development, it should be changed to **->ver('your_version')** when used in production.
+However this can be fustrating while developing, so rather than using the current timestamp as a temp version. You can use the *lastest_version()*, this grabs the last modified date from the defined script or style sheet, allowing reducing the fustrations of caching during development. While this is really handy during development, it should be changed to **->ver('1.2.2')** when used in production.
 ```php
 <?php
 Enqueue::script('my_script')
@@ -90,3 +90,30 @@ Enqueue::script('my_script')
     ->lastest_version() 
 ```
 
+### Dependencies  ###
+As with all wp_enqueue_script() and wp_enqueue_style() function, required dependencies can be called. This allows for your scripts and styles to be called in order.
+```php
+<?php
+Enqueue::script('my_script')
+    ->src(PLUGIN_BASE_URL . 'assets/js/my-script.js')
+    ->dep('jquery') // Only enqueued after jQuery.
+```
+
+
+### Front vs wp-admin  ###
+By defualt enqueue can be used for both the frontend and wp-admin (inc ajax, rest). You have control over where they called.
+
+```php
+<?php
+// Dont enqueue if is_admin()
+Enqueue::script('my_script')
+    ->src(PLUGIN_BASE_URL . 'assets/js/my-script.js')
+    ->lastest_version() 
+    ->admin(false)
+
+// Only enqueue if ! is_admin()
+Enqueue::script('my_script')
+    ->src(PLUGIN_BASE_URL . 'assets/js/my-script.js')
+    ->lastest_version() 
+    ->front(false)
+```

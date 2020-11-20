@@ -106,7 +106,7 @@ class Enqueue {
 	 *
 	 * @var boolean
 	 */
-	protected $admin = false;
+	protected $admin = true;
 
 
 	/**
