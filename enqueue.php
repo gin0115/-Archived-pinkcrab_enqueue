@@ -26,7 +26,7 @@ namespace PinkCrab;
  *
  * @author Glynn Quelch <glynn.quelch@gmail.com>
  */
-class Enqueue {
+final class Enqueue {
 
 	/**
 	 * The handle to enqueue the script or style with.
@@ -107,7 +107,6 @@ class Enqueue {
 	 * @var boolean
 	 */
 	protected $admin = true;
-
 
 	/**
 	 * Creates an Enqueue instance.
@@ -242,6 +241,16 @@ class Enqueue {
 	 */
 	public function footer( bool $footer = true ): self {
 		$this->footer = $footer;
+		return $this;
+	}
+
+	/**
+	 * Should the script be called in the header.
+	 *
+	 * @return self
+	 */
+	public function header(): self {
+		$this->footer = false;
 		return $this;
 	}
 
