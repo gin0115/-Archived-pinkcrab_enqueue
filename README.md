@@ -4,6 +4,8 @@ The PinkCrab Enqueue calss allows for a clean and chainable alternative for enqu
 
 ** At present this class doesnt support BC in regards named properties in PHP8. Argument names may change, although we have made this so most methods take a single or no properites at all. **
 
+
+
 ```php
 <?php 
 add_action('wp_enqueue_scripts', function(){
