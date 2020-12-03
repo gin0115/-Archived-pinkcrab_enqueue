@@ -52,7 +52,7 @@ final class Enqueue {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	protected $src;
+	protected $src = '';
 
 	/**
 	 * Dependencies which must be loaded prior.
