@@ -152,7 +152,6 @@ Enqueue::script('MyScriptHandle')
 ```
 Useage within js file (my-script.js)
 ```js
-<?php
 console.log(MyScriptHandle.key1) // value1
 console.log(MyScriptHandle.key2) // value2
 ```
