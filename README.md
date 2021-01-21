@@ -1,3 +1,14 @@
+This is no longer maintained under this repository, you can now find the latest version here.
+
+
+https://github.com/Pink-Crab/Enqueue
+
+
+
+
+
+*********************
+
 # PinkCrab > Enqueue #
 
 The PinkCrab Enqueue calss allows for a clean and chainable alternative for enqueuing scripts and styles in WordPress.
